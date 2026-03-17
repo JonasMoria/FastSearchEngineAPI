@@ -1,2 +1,2 @@
 # FastSearchEngineAPI
-API para buscar rápidas
+API para buscar rápidas, sugestões com eficiência!
