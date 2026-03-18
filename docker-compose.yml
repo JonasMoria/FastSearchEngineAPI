@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
+    user: "${UID}:${GID}"
     container_name: fastsearch_app
     volumes:
       - ./api:/var/www
