@@ -80,6 +80,23 @@ php artisan migrate
 - API: http://localhost:8000
 - RedisInsight (Redis Stack): http://localhost:8001
 
+### 📄 Documentação da API (Swagger)
+
+A documentação interativa da API está disponível via Swagger UI:
+
+- http://localhost/docs
+
+Por lá você pode:
+
+- visualizar todos os endpoints
+- testar requisições diretamente no navegador
+- validar payloads e respostas
+- entender rapidamente o funcionamento da API
+
+O arquivo OpenAPI (YAML) também pode ser acessado diretamente:
+
+- http://localhost/docs/api.yaml
+
 ### ⚠️ Observações
 
 - O MySQL é usado para persistência

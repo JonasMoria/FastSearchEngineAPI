@@ -1,0 +1,101 @@
+openapi: 3.0.0
+
+info:
+  title: Fast Search API
+  version: 1.0.0
+  description: Documentação da API de sugestões
+
+servers:
+  - url: http://localhost:8000/api
+
+paths:
+  /suggestions:
+    post:
+      summary: Criar sugestão
+      tags:
+        - Suggestions
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - primary_name
+              properties:
+                primary_name:
+                  type: string
+                  example: "iPhone 15"
+                secondary_name:
+                  type: string
+                  example: "Apple"
+                image_path:
+                  type: string
+                  example: "https://example.com/image.jpg"
+                priority:
+                  type: integer
+                  example: 10
+                type:
+                  type: string
+                  example: "product"
+                metadata:
+                  type: object
+                  example:
+                    brand: "Apple"
+                    category: "Smartphone"
+                    rating: 4.8
+                    tags:
+                      - "premium"
+                      - "ios"
+                      - "mobile"
+
+      responses:
+        201:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: "Sugestão criada com sucesso"
+                  data:
+                    type: object
+                    example:
+                      id: 1
+                      primary_name: "iPhone 15"
+                      secondary_name: "Apple"
+                      image_path: "https://example.com/images/iphone15.jpg"
+                      priority: 10
+                      type: "product"
+                      metadata:
+                        brand: "Apple"
+                        category: "Smartphone"
+                        rating: 4.8
+                        tags:
+                          - "premium"
+                          - "ios"
+                          - "mobile"
+                      created_at: "2026-03-20T10:00:00Z"
+                      updated_at: "2026-03-20T10:00:00Z"
+
+        422:
+          description: Erro de validação
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 422
+                  message:
+                    type: string
+                    example: " O nome principal é obrigatório."
+                  data:
+                    type: object
