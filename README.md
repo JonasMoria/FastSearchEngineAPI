@@ -79,7 +79,7 @@ php artisan migrate
 
 A documentação interativa da API está disponível via Swagger UI:
 
-- http://localhost/docs
+- http://localhost:8000/docs
 
 Por lá você pode:
 
@@ -90,7 +90,7 @@ Por lá você pode:
 
 O arquivo OpenAPI (YAML) também pode ser acessado diretamente:
 
-- http://localhost/docs/api.yaml
+- http://localhost:8000/docs/api.yaml
 
 ### ⚠️ Observações
 
