@@ -30,4 +30,10 @@ class SuggestionService {
             'Sugestão encontrada com sucesso'
         );
     }
+
+    public function update(array $data, Suggestion $suggestion): JsonResponse {
+        $suggestion->update($data);
+
+        return ApiResponse::success($suggestion, 'Sugestão atualizada com sucesso!');
+    }
 } 

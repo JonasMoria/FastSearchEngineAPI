@@ -10,4 +10,5 @@ Route::get('health', [HealthController::class, 'getHealth']);
 Route::prefix('suggestions')->group(function() {
     Route::post('/', [SuggestionController::class, 'store']);
     Route::get('/{id}', [SuggestionController::class, 'showById']);
+    Route::patch('/{suggestion}', [SuggestionController::class, 'update']);
 });
