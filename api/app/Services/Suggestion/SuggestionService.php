@@ -32,8 +32,10 @@ class SuggestionService {
     }
 
     public function update(array $data, Suggestion $suggestion): JsonResponse {
-        $suggestion->update($data);
+        // Limpa para ser reenviado ao Redis
+        $data['cached_at'] = null;
 
+        $suggestion->update($data);
         return ApiResponse::success($suggestion, 'Sugestão atualizada com sucesso!');
     }
 } 
