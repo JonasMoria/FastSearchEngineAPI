@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Suggestion;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Suggestion\SuggestionStoreRequest;
+use App\Models\Suggestion\Suggestion;
 use App\Services\Suggestion\SuggestionService;
 use App\Support\Http\ApiResponse;
 use App\Support\Http\HttpStatus;
@@ -15,14 +16,10 @@ class SuggestionController extends Controller {
     }
 
     public function store(SuggestionStoreRequest $request) {
-        $suggestion = $this->service->create($request->validated());
-
-        return ApiResponse::success(
-            $suggestion,
-            'Sugestão cadastrada com sucesso',
-            HttpStatus::CREATED
-        );
+        return $this->service->create($request->validated());
     }
 
-    
+    public function showById(int $id) {
+        return $this->service->showById($id);
+    }
 }
