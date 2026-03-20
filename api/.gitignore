@@ -1,4 +1,6 @@
 *.log
+.config
+.bash_history
 .DS_Store
 .env
 .env.backup
@@ -22,3 +24,4 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+supervisord.pid

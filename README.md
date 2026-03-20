@@ -65,11 +65,6 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-### 3.1. Configurar variáveis do Docker (raiz do projeto)
-```bash
-cp .env.example .env
-```
-
 ### 4. Rodar Migrations
 
 ```bash
