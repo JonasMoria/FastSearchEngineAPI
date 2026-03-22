@@ -98,7 +98,6 @@ paths:
 
         404:
           description: Sugestão não encontrada
-
   /suggestions/{suggestion}:
     patch:
       summary: Atualizar sugestão
@@ -178,6 +177,88 @@ paths:
 
         404:
           description: Sugestão não encontrada
+  /suggestions/search:
+    get:
+      summary: Buscar sugestões
+      description: |
+        Realiza busca de sugestões utilizando RediSearch com suporte a prefixo (autocomplete).
+        A busca é feita nos campos `primary_name` e `secondary_name`, ordenada por prioridade.
+
+      tags:
+        - Suggestions
+
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: Texto da busca
+          schema:
+            type: string
+            minLength: 3
+            example: "iph"
+
+      responses:
+        200:
+          description: Lista de sugestões encontrada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: "Sucesso"
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: "1"
+                        primary_name:
+                          type: string
+                          example: "iphone 15"
+                        secondary_name:
+                          type: string
+                          example: "apple"
+                        type:
+                          type: string
+                          example: "product"
+                        priority:
+                          type: string
+                          example: "10"
+
+        422:
+          description: Parâmetro inválido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 422
+                  message:
+                    type: string
+                    example: "Parâmetro q é obrigatório"
+
+        500:
+          description: Erro interno na busca
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: "Erro ao buscar sugestões"
 
   /redis/init:
     post:
