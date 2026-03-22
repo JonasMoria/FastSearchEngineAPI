@@ -178,3 +178,43 @@ paths:
 
         404:
           description: Sugestão não encontrada
+
+  /redis/init:
+    post:
+      summary: Inicializar Redis e recriar índice de sugestões
+      description: |
+        Limpa todos os dados do Redis, recria o índice do RediSearch e dispara a reindexação assíncrona das sugestões.
+      tags:
+        - Redis
+
+      responses:
+        200:
+          description: Redis inicializado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: "Redis iniciado com sucesso"
+                  data:
+                    type: object
+                    example: {}
+
+        500:
+          description: Erro ao inicializar Redis
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: "Não foi possível inicializar o Redis"
