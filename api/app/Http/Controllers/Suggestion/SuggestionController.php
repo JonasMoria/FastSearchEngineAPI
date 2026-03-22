@@ -7,6 +7,7 @@ use App\Http\Requests\Suggestion\SuggestionStoreRequest;
 use App\Http\Requests\Suggestion\SuggestionUpdateRequest;
 use App\Models\Suggestion\Suggestion;
 use App\Services\Suggestion\SuggestionService;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SuggestionController extends Controller {
@@ -29,5 +30,9 @@ class SuggestionController extends Controller {
 
     public function destroy(Suggestion $suggestion): JsonResponse {
         return $this->service->destroy($suggestion);
+    }
+
+    public function search(Request $request): JsonResponse {
+        return $this->service->search($request);
     }
 }

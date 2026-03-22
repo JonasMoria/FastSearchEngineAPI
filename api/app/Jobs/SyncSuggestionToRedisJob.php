@@ -57,8 +57,8 @@ class SyncSuggestionToRedisJob implements ShouldQueue {
 
         $data = [
             'id' => $suggestion->id,
-            'primary_name' => $suggestion->primary_name,
-            'secondary_name' => $suggestion->secondary_name,
+            'primary_name' => mb_strtolower($suggestion->primary_name, 'UTF-8'),
+            'secondary_name' => mb_strtolower($suggestion->secondary_name, 'UTF-8'),
             'type' => $suggestion->type,
             'image_path' => $suggestion->image_path,
             'priority' => $suggestion->priority,

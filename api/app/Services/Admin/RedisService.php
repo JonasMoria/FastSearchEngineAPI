@@ -42,6 +42,41 @@ class RedisService {
         }
     }
 
+    public function search(string $query): array {
+        $redis = app('redis')->connection()->client();
+
+        $result = $redis->rawcommand(
+            'FT.SEARCH',
+            'idx:suggestions',
+            "(@primary_name:{$query}* | @secondary_name:{$query}*)",
+            'SORTBY', 'priority', 'DESC',
+            'LIMIT', '0', '10'
+        );
+
+        return $this->formatSearchResult($result);
+    }
+
+    private function formatSearchResult(array $result): array {
+        $data = [];
+
+        for ($i = 1; $i < count($result); $i += 2) {
+            $id = $result[$i];
+            $fields = $result[$i + 1];
+
+            $formatted = [
+                'id' => str_replace('suggestion:', '', $id),
+            ];
+
+            for ($j = 0; $j < count($fields); $j += 2) {
+                $formatted[$fields[$j]] = $fields[$j + 1];
+            }
+
+            $data[] = $formatted;
+        }
+
+        return $data;
+    }
+
     private function createSearchIndexes(): void {
         $redis = app('redis')->connection()->client();
 
