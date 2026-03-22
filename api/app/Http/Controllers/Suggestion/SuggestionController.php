@@ -26,4 +26,8 @@ class SuggestionController extends Controller {
     public function update(SuggestionUpdateRequest $request, Suggestion $suggestion): JsonResponse {
         return  $this->service->update($request->validated(), $suggestion);
     }
+
+    public function destroy(Suggestion $suggestion): JsonResponse {
+        return $this->service->destroy($suggestion);
+    }
 }

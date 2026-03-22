@@ -66,26 +66,25 @@ paths:
                     example: "Sugestão criada com sucesso"
                   data:
                     type: object
-                    example:
-                      id: 1
-                      primary_name: "iPhone 15"
-                      secondary_name: "Apple"
-                      image_path: "https://example.com/images/iphone15.jpg"
-                      priority: 10
-                      type: "product"
-                      metadata:
-                        brand: "Apple"
-                        category: "Smartphone"
-                        rating: 4.8
-                        tags:
-                          - "premium"
-                          - "ios"
-                          - "mobile"
-                      created_at: "2026-03-20T10:00:00Z"
-                      updated_at: "2026-03-20T10:00:00Z"
 
         422:
           description: Erro de validação
+  /suggestions/{id}:
+    get:
+      summary: Buscar sugestão por ID
+      tags:
+        - Suggestions
+
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        200:
+          description: Sucesso
           content:
             application/json:
               schema:
@@ -93,9 +92,89 @@ paths:
                 properties:
                   status:
                     type: integer
-                    example: 422
-                  message:
-                    type: string
-                    example: " O nome principal é obrigatório."
+                    example: 200
                   data:
                     type: object
+
+        404:
+          description: Sugestão não encontrada
+
+  /suggestions/{suggestion}:
+    patch:
+      summary: Atualizar sugestão
+      tags:
+        - Suggestions
+
+      parameters:
+        - name: suggestion
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                primary_name:
+                  type: string
+                  example: "iPhone 15 Pro"
+                secondary_name:
+                  type: string
+                  example: "Apple"
+                image_path:
+                  type: string
+                  example: "https://example.com/image.jpg"
+                priority:
+                  type: integer
+                  example: 20
+                type:
+                  type: string
+                  example: "product"
+                metadata:
+                  type: object
+
+      responses:
+        200:
+          description: Atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: "Sugestão atualizada com sucesso"
+                  data:
+                    type: object
+
+        404:
+          description: Sugestão não encontrada
+
+        422:
+          description: Erro de validação
+
+    delete:
+      summary: Remover sugestão
+      tags:
+        - Suggestions
+
+      parameters:
+        - name: suggestion
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        204:
+          description: Removido com sucesso (sem conteúdo)
+
+        404:
+          description: Sugestão não encontrada

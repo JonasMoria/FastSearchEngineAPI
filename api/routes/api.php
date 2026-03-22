@@ -11,4 +11,5 @@ Route::prefix('suggestions')->group(function() {
     Route::post('/', [SuggestionController::class, 'store']);
     Route::get('/{id}', [SuggestionController::class, 'showById']);
     Route::patch('/{suggestion}', [SuggestionController::class, 'update']);
+    Route::delete('/{suggestion}', [SuggestionController::class, 'destroy']);
 });

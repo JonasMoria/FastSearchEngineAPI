@@ -2,6 +2,7 @@
 
 namespace App\Services\Suggestion;
 
+use App\Jobs\RemoveSuggestionFromRedisJob;
 use App\Models\Suggestion\Suggestion;
 use App\Support\Http\ApiResponse;
 use App\Support\Http\HttpStatus;
@@ -37,5 +38,13 @@ class SuggestionService {
 
         $suggestion->update($data);
         return ApiResponse::success($suggestion, 'Sugestão atualizada com sucesso!');
+    }
+
+    public function destroy(Suggestion $suggestion): JsonResponse {
+        $suggestion->delete();
+
+        RemoveSuggestionFromRedisJob::dispatch($suggestion->id);
+
+        return ApiResponse::success([], 'Sugestão removida com sucesso!');
     }
 } 
